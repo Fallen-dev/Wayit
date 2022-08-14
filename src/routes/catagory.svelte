@@ -1,0 +1,116 @@
+<script lang="ts">
+	import PlaceholderCatagoryCard from '$lib/layouts/placeholder/PlaceholderCatagoryCard.svelte'
+	import URL from '$lib/url'
+	import { NumberFormat } from '$lib/utils'
+	import { onMount } from 'svelte'
+
+	let catagories: {
+		advertiser_category: string
+		banner_background_color: string
+		banner_img: string
+		community_icon: string
+		community_reviewed: string
+		created: string
+		description: string
+		description_html: string
+		display_name_prefixed: string
+		header_img: string
+		header_title: string
+		icon_img: string
+		key_color: string
+		over18: string
+		public_description: string
+		public_description_html: string
+		subscribers: string
+		title: string
+		url: string
+	}[] = []
+	let loaded = false
+
+	async function load() {
+		if (localStorage.getItem('catagories')) {
+			loaded = true
+			return catagories.push(...JSON.parse(localStorage.getItem('catagories') || ''))
+		}
+		const res = await fetch(URL + 'subreddits.json')
+		const data = await res.json()
+
+		data.data.children.map((data: { data: any }) =>
+			catagories.push({
+				advertiser_category: data.data.advertiser_category,
+				banner_background_color: data.data.banner_background_color,
+				banner_img: data.data.banner_img,
+				community_icon: data.data.community_icon,
+				community_reviewed: data.data.community_reviewed,
+				created: data.data.created,
+				description: data.data.description,
+				description_html: data.data.description_html,
+				display_name_prefixed: data.data.display_name_prefixed,
+				header_img: data.data.header_img,
+				header_title: data.data.header_title,
+				icon_img: data.data.icon_img,
+				key_color: data.data.key_color,
+				over18: data.data.over18,
+				public_description: data.data.public_description,
+				public_description_html: data.data.public_description_html,
+				subscribers: data.data.subscribers,
+				title: data.data.title,
+				url: data.data.url
+			})
+		)
+		loaded = true
+		localStorage.setItem('catagories', JSON.stringify(catagories))
+	}
+	onMount(() => {
+		load()
+	})
+	const noOfPlaceholders = Array(3)
+</script>
+
+<section class="p-6 pb-24 space-y-6">
+	{#if !loaded}
+		{#each noOfPlaceholders as _}
+			<PlaceholderCatagoryCard />
+		{/each}
+	{:else}
+		{#each catagories as catagory}
+			<div class="relative rounded-2xl bg-base-100 isolate overflow-hidden">
+				<div class="p-4 space-y-4">
+					<div class="w-min gap-4 &flexbox">
+						{#if catagory.icon_img}
+							<div class="w-12 h-12 rounded-full bg-neutral overflow-hidden">
+								<img class="block w-full h-full object-cover" src={catagory.icon_img} alt="" />
+							</div>
+						{/if}
+						<div class="flex flex-col">
+							<p class="flex-wrap font-bold truncate text-accent">
+								{catagory.display_name_prefixed}
+							</p>
+							<p class="w-max text-sm">
+								{NumberFormat(catagory.subscribers)} subscribers
+							</p>
+						</div>
+					</div>
+					{#if catagory.over18 === 'true'}
+						<div class="badge badge-warning badge-outline">nsfw</div>
+					{/if}
+					<h4 class="text-lg font-bold text-primary">
+						{catagory.title ? catagory.title : catagory.header_title}
+					</h4>
+					{#if catagory.public_description}
+						<p>{catagory.public_description}</p>
+					{/if}
+				</div>
+				{#if catagory.banner_img}
+					<div class="absolute inset-0 bg-black opacity-20 -z-[1]">
+						<img
+							class="block w-full h-full object-cover rounded-2xl"
+							src={catagory.banner_img}
+							alt=""
+						/>
+					</div>
+				{/if}
+			</div>
+		{/each}
+	{/if}
+</section>
