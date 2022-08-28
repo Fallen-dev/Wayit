@@ -10,7 +10,7 @@
 	const sortWIP = true
 </script>
 
-<header class="w-full sticky top-0 bg-base-200 p-6 pb-4 space-y-4 z-50">
+<header class="w-full sticky top-0 bg-base-100 p-6 pb-4 space-y-4 z-50">
 	<div class="w-min gap-4 &flexbox">
 		{#if $page.url.pathname !== '/home'}
 			<a href="/home" sveltekit:noscroll>

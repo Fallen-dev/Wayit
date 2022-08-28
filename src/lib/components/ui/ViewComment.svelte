@@ -1,15 +1,7 @@
 <script lang="ts">
-	import moment from 'moment'
-	import { marked } from 'marked'
+	import { UNIXTSReadable } from '$lib/utils'
+
 	export let author: string, created: string, comment: string
-
-	function parseMD(str: string) {
-		if (str === undefined || str === null) str = 'No comment data'
-		return marked.parse(str)
-	}
-	console.log(comment)
-
-	$: parsedMD = parseMD(comment)
 </script>
 
 <div class="space-y-6">
@@ -18,10 +10,10 @@
 			<div class="gap-3 &flexbox">
 				<p class="font-bold text-accent">u/{author}</p>
 				<p class="text-sm text-neutral">
-					{moment.unix(+created).format('dddd, MMM D')}
+					{UNIXTSReadable(created)}
 				</p>
 			</div>
-			<div contenteditable="false" bind:innerHTML={parsedMD} />
+			<div>{@html comment}</div>
 		</div>
 	</div>
 </div>

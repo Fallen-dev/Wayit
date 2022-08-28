@@ -12,9 +12,9 @@
 
 <div data-id={id} class="gap-2 &flexbox">
 	<div class="flex-shrink flex flex-col justify-items-stretch overflow-hidden">
-		<p class="max-w-[12rem] font-bold text-accent truncate">r/{subreddit}</p>
+		<p class="max-w-[12rem] text-sm font-bold text-accent truncate">r/{subreddit}</p>
 		<div class="text-sm gap-1 &flexbox">
-			<p class="max-w-[12rem] flex-shrink-0 truncate">
+			<p class="max-w-[12rem] text-sm flex-shrink-0 truncate">
 				{#if author_premium}
 					<div class="gap-1 &flexbox">
 						<svg
@@ -47,7 +47,7 @@
 					u/{uname}
 				{/if}
 			</p>
-			<span class="text-neutral">&nbsp;&bull;&nbsp;{date}</span>
+			<span class="text-neutral text-sm">&nbsp;&bull;&nbsp;{date}</span>
 		</div>
 	</div>
 	<div class="space-x-4 text-neutral-content/25 flex-wrap gap-2 &flexbox">

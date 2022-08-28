@@ -7,9 +7,9 @@
 		<!-- Badges -->
 		<div class="max-w-max space-x-3 flex-wrap &flexbox">
 			{#if +total_awards_received > 0}
-				<div class="gap-1 &flexbox">
+				<div class="gap-1 text-sm &flexbox">
 					<svg
-						class="w-5 h-5 flex-shrink-0"
+						class="w-4 h-4 flex-shrink-0"
 						viewBox="0 0 24 24"
 						fill="none"
 						stroke="currentColor"
@@ -38,13 +38,13 @@
 				</div>
 			{/if}
 			{#if post_hint !== 'image' && typeof post_hint !== 'undefined'}
-				<span class="badge">{post_hint}</span>
+				<span class="badge badge-sm">{post_hint}</span>
 			{/if}
 			{#if is_video === 'true'}
-				<span class="badge">Video</span>
+				<span class="badge badge-sm">Video</span>
 			{/if}
 			{#if over_18 === 'true'}
-				<span class="badge badge-primary">NSFW</span>
+				<span class="badge badge-primary badge-sm">NSFW</span>
 			{/if}
 		</div>
 		<!-- <p class="ml-2 flex-shrink-0 text-right text-sm text-neutral">Wed Jun 17, 22</p> -->

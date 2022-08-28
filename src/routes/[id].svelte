@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition'
-	import Header from '$lib/layouts/Header.svelte'
-	import Navbar from '$lib/layouts/Navbar.svelte'
 	import { onMount } from 'svelte'
 	import URL from '$lib/url'
 	import { page } from '$app/stores'
@@ -15,7 +13,7 @@
 		data: {
 			author: string
 			created: string
-			body: string
+			body_html: string
 		}
 		selftext_html: string
 		selftext: string
@@ -66,7 +64,6 @@
 	onMount(load)
 </script>
 
-<Header />
 <section
 	in:fly={{ y: 200, duration: 450 }}
 	out:fly={{ y: -200, duration: 450 }}
@@ -98,7 +95,7 @@
 				vdo_src={data.media?.reddit_video.fallback_url}
 				img_src={data.preview?.images[0].source.url}
 				thumbnail={data?.thumbnail}
-				overwriteClass
+				overrideClass
 				class={'p-6 space-y-4'}
 			/>
 		{/each}
@@ -110,10 +107,9 @@
 				<ViewComment
 					author={comment.data.author}
 					created={comment.data.created}
-					comment={comment.data.body}
+					comment={comment.data.body_html}
 				/>
 			{/each}
 		{/if}
 	{/if}
 </section>
-<Navbar />

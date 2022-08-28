@@ -30,7 +30,7 @@
 <a
 	href={id}
 	data-id={id}
-	class="block bg-base-100 {$$restProps.overwriteClass
+	class="block bg-base-100 {$$restProps.overrideClass
 		? $$restProps.class
 		: 'p-4 rounded-2xl space-y-4 border border-neutral/5'}"
 >
