@@ -12,8 +12,8 @@
 </div>
 
 <style>
-	:global(.md > p, h1, h2, h3, h4, h5, h6, pre, code, span, a) {
-		white-space: inherit;
+	:global(.md > code, a) {
+		word-break: break-all;
 	}
 	:global(.md > a[href*='https']) {
 		text-decoration: underline;

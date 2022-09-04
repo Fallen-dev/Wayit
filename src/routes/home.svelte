@@ -74,7 +74,7 @@
 	const noOfPlaceholders = Array(3)
 </script>
 
-<h1 class="text-4xl font-light p-6">New posts from Reeddit</h1>
+<h1 class="text-4xl font-light px-4 py-6">New posts from Reeddit</h1>
 <section in:fly={{ y: 200, duration: 450 }} on:introend={startData} class="px-2 pb-24 space-y-4">
 	{#if !loaded}
 		{#each noOfPlaceholders as _}

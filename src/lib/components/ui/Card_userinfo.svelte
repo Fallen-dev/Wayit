@@ -12,7 +12,9 @@
 
 <div data-id={id} class="gap-2 &flexbox">
 	<div class="flex-shrink flex flex-col justify-items-stretch overflow-hidden">
-		<p class="max-w-[12rem] text-sm font-bold text-accent truncate">r/{subreddit}</p>
+		<a href={'/r/' + subreddit} class="max-w-[12rem] text-sm font-bold text-accent truncate"
+			>r/{subreddit}</a
+		>
 		<div class="text-sm gap-1 &flexbox">
 			<p class="max-w-[12rem] text-sm flex-shrink-0 truncate">
 				{#if author_premium}
@@ -47,7 +49,7 @@
 					u/{uname}
 				{/if}
 			</p>
-			<span class="text-neutral text-sm">&nbsp;&bull;&nbsp;{date}</span>
+			<span class="text-primary/40 text-sm">&nbsp;&bull;&nbsp;{date}</span>
 		</div>
 	</div>
 	<div class="space-x-4 text-neutral-content/25 flex-wrap gap-2 &flexbox">
@@ -55,7 +57,7 @@
 		<!-- Currently not working -->
 		{#if postsaved}
 			<svg
-				class="w-6 h-6"
+				class="w-5 h-5"
 				viewBox="0 0 24 24"
 				fill="none"
 				stroke="currentColor"
@@ -73,7 +75,7 @@
 			</svg>
 		{:else}
 			<svg
-				class="w-6 h-6"
+				class="w-5 h-5"
 				viewBox="0 0 24 24"
 				fill="none"
 				stroke="currentColor"
@@ -101,7 +103,7 @@
 			</svg>
 		{/if}
 		<svg
-			class="w-6 h-6"
+			class="w-5 h-5"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"

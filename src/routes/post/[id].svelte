@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition'
-	import { onMount } from 'svelte'
 	import URL from '$lib/url'
 	import { page } from '$app/stores'
 	import PCard from '$lib/layouts/placeholder/P_Card.svelte'
@@ -8,6 +7,7 @@
 	import PlaceholderComment from '$lib/layouts/placeholder/PlaceholderComment.svelte'
 	import ViewComment from '$lib/components/ui/ViewComment.svelte'
 	import Card from '$lib/layouts/Card.svelte'
+	import { browser } from '$app/env'
 
 	interface Data {
 		data: {
@@ -52,6 +52,7 @@
 	let postdata: Data[] = []
 	let postcomment: Data[] = []
 
+	let introAnimated = false
 	let loaded = false
 
 	async function load() {
@@ -61,16 +62,16 @@
 		postdata.push(data[0].data.children[0].data)
 		data[1].data.children.forEach((data: any) => postcomment.push(data))
 		loaded = true
+		introAnimated = true
 	}
-	onMount(load)
+	setTimeout(() => {
+		if (!introAnimated) {
+			browser && load()
+		}
+	}, 1000)
 </script>
 
-<section
-	in:fly={{ y: 200, duration: 450 }}
-	out:fly={{ y: -200, duration: 450 }}
-	on:introend={() => console.log('Transition ENDED')}
-	class="px-2 pb-24 space-y-4"
->
+<section in:fly={{ y: 200, duration: 450 }} out:fly={{ y: -200, duration: 450 }} on:introend={load}>
 	{#if !loaded}
 		<PCard />
 	{:else}
@@ -97,22 +98,28 @@
 				img_src={data.preview?.images[0].source.url}
 				thumbnail={data?.thumbnail}
 				overrideClass
-				class={'p-6 space-y-4'}
+				class={'-mx-2 p-6 space-y-4'}
 			/>
 		{/each}
-		<div class="divider px-6" />
-		<!-- Comments -->
-		{#if postcomment.length === 0}
-			<PlaceholderComment />
-		{:else}
-			{#each postcomment as comment}
-				<ViewComment
-					author={comment.data.author}
-					created={comment.data.created}
-					comment={comment.data.body_html}
-					ups={NumberFormat(comment.data.ups)}
-				/>
-			{/each}
-		{/if}
+	{/if}
+</section>
+<div class="divider px-6" />
+<!-- Comments -->
+<section
+	in:fly={{ y: 200, duration: 450, delay: 500 }}
+	out:fly={{ y: -200, duration: 450, delay: 500 }}
+	class="px-2 pb-24 space-y-4"
+>
+	{#if !loaded}
+		<PlaceholderComment />
+	{:else}
+		{#each postcomment as comment}
+			<ViewComment
+				author={comment.data.author}
+				created={comment.data.created}
+				comment={comment.data.body_html}
+				ups={NumberFormat(comment.data.ups)}
+			/>
+		{/each}
 	{/if}
 </section>

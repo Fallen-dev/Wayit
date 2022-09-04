@@ -9,8 +9,6 @@
 	import { NumberFormat, UNIXTSReadable } from '$lib/utils'
 	import { fly } from 'svelte/transition'
 
-	console.log($page.url)
-
 	let subredditInfo: {
 		active_user_count: string
 		advertiser_category: string
@@ -103,7 +101,7 @@
 		<PlaceholderCatagoryCard />
 	{:else}
 		{#each subredditInfo as data}
-			<div class="mt-4 px-6">
+			<div class="p-6 bg-base-100">
 				<div class="space-y-6 text-center">
 					<div class="avatar flex items-center justify-between gap-6">
 						<div class="text-sm mt-auto">
@@ -131,33 +129,22 @@
 						<button
 							on:click={() => {
 								clickToShowInfo = !clickToShowInfo
-								clickToShowDesc = false
+								// if (clickToShowDesc) return (clickToShowDesc = false)
+								// return
 							}}
 							class="btn btn-sm rounded-full normal-case"
 						>
 							{clickToShowInfo ? 'Hide' : 'Show'} more info
 						</button>
-						<button
-							on:click={() => {
-								clickToShowDesc = !clickToShowDesc
-								clickToShowInfo = false
-							}}
-							class="btn btn-sm rounded-full normal-case"
-						>
-							{clickToShowDesc ? 'Hide' : 'Show'} description
-						</button>
 					</div>
 					{#if clickToShowInfo}
-						<div class="space-y-6 text-left">
+						<div class="space-y-4 text-left">
 							<p>Created {UNIXTSReadable(data.created)}</p>
 							<p>Channel type: {data.subreddit_type}</p>
 							<p>Channel id: {data.id}</p>
 							<p>Advertiser category: {data.advertiser_category}</p>
 							<p>Language: {data.lang}</p>
-						</div>
-					{/if}
-					{#if clickToShowDesc}
-						<div class="text-left">
+							<div class="divider">Description</div>
 							{@html data.description_html}
 						</div>
 					{/if}

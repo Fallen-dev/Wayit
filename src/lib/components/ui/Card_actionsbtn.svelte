@@ -5,7 +5,7 @@
 <div class="ml-auto w-min space-x-8 &flexbox">
 	<div class="&flexbox">
 		<svg
-			class="w-6 h-6"
+			class="w-5 h-5"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
@@ -27,7 +27,7 @@
 	</div>
 	<div class="&flexbox">
 		<svg
-			class="w-6 h-6"
+			class="w-5 h-5"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
@@ -47,7 +47,7 @@
 	</div>
 	<div>
 		<svg
-			class="w-6 h-6"
+			class="w-5 h-5"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"

@@ -113,13 +113,13 @@
 		>
 	</div>
 </div> -->
+<h1 class="text-4xl font-light px-4 py-6">Popular all the time</h1>
 <section in:fly={{ y: 200, duration: 450 }} on:introend={() => load()} class="px-2 pb-24 space-y-4">
 	{#if !loaded}
 		{#each noOfPlaceholders as _}
 			<PlaceholderCatagoryCard />
 		{/each}
 	{:else}
-		<h1 class="text-4xl font-light p-6">Popular all the time</h1>
 		{#each catagoriesPopular as catagory}
 			<a
 				href={'r/' + catagory.display_name}
@@ -162,7 +162,7 @@
 				{/if}
 			</a>
 		{/each}
-		<h1 class="text-4xl font-light p-6">Newest subreddits this week</h1>
+		<h1 class="text-4xl font-light px-4 py-6">Newest subreddits this week</h1>
 		{#each catagoriesNew as catagory}
 			<a
 				href={'r/' + catagory.display_name}

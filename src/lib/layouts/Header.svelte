@@ -28,10 +28,14 @@
 			return (value = 1)
 		return value
 	}
+	let y = 0
 </script>
 
+<svelte:window bind:scrollY={y} />
 {#if checkRoute()}
-	<header class="w-full sticky bg-base-300 top-0 p-6 z-50">
+	<header
+		class="w-full sticky bg-base-{y > 0 ? '300' : '100'} transition-colors top-0 px-4 py-5 z-50"
+	>
 		<div class="w-min gap-4 &flexbox">
 			{#if checkRoute()}
 				<a href={prevURL || '/home'} class="btn btn-sm btn-circle">

@@ -9,14 +9,14 @@
 		<div class="space-y-3">
 			<div class="gap-3 &flexbox">
 				<p class="font-bold text-accent text-sm">u/{author}</p>
-				<p class="text-sm text-neutral">
+				<p class="text-sm text-primary/40">
 					{UNIXTSReadable(created)}
 				</p>
 			</div>
 			<div>{@html comment}</div>
 			<div class="&flexbox justify-end gap-1">
 				<svg
-					class="w-6 h-6"
+					class="w-5 h-5"
 					viewBox="0 0 24 24"
 					fill="none"
 					stroke="currentColor"
