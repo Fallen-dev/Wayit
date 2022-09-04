@@ -28,7 +28,7 @@
 </script>
 
 <a
-	href={id}
+	href={'/post/' + id}
 	data-id={id}
 	class="block bg-base-100 {$$restProps.overrideClass
 		? $$restProps.class

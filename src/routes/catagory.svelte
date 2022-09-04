@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition'
 	import PlaceholderCatagoryCard from '$lib/layouts/placeholder/PlaceholderCatagoryCard.svelte'
 	import URL from '$lib/url'
 	import { NumberFormat } from '$lib/utils'
-	import { onMount } from 'svelte'
+	import { browser } from '$app/env'
 
 	let catagories: {
 		advertiser_category: string
@@ -13,7 +14,7 @@
 		created: string
 		description: string
 		description_html: string
-		display_name_prefixed: string
+		display_name: string
 		header_img: string
 		header_title: string
 		icon_img: string
@@ -26,13 +27,15 @@
 		url: string
 	}[] = []
 	let loaded = false
+	let introAnimated = false
 
 	async function load() {
+		introAnimated = true
 		if (localStorage.getItem('catagories')) {
 			loaded = true
 			return catagories.push(...JSON.parse(localStorage.getItem('catagories') || ''))
 		}
-		const res = await fetch(URL + 'subreddits.json')
+		const res = await fetch(URL + 'subreddits.json?raw_json=1')
 		const data = await res.json()
 
 		data.data.children.map((data: { data: any }) =>
@@ -45,7 +48,7 @@
 				created: data.data.created,
 				description: data.data.description,
 				description_html: data.data.description_html,
-				display_name_prefixed: data.data.display_name_prefixed,
+				display_name: data.data.display_name,
 				header_img: data.data.header_img,
 				header_title: data.data.header_title,
 				icon_img: data.data.icon_img,
@@ -61,20 +64,23 @@
 		loaded = true
 		localStorage.setItem('catagories', JSON.stringify(catagories))
 	}
-	onMount(() => {
-		load()
-	})
+	setTimeout(() => {
+		if (!introAnimated) browser && load()
+	}, 1000)
 	const noOfPlaceholders = Array(3)
 </script>
 
-<section class="p-6 pb-24 space-y-6">
+<section in:fly={{ y: 200, duration: 450 }} on:introend={load} class="p-6 pb-24 space-y-6">
 	{#if !loaded}
 		{#each noOfPlaceholders as _}
 			<PlaceholderCatagoryCard />
 		{/each}
 	{:else}
 		{#each catagories as catagory}
-			<div class="relative rounded-2xl bg-base-100 isolate overflow-hidden">
+			<a
+				href={'r/' + catagory.display_name}
+				class="block relative rounded-2xl bg-base-100 isolate overflow-hidden"
+			>
 				<div class="p-4 space-y-4">
 					<div class="w-min gap-4 &flexbox">
 						{#if catagory.icon_img}
@@ -84,7 +90,7 @@
 						{/if}
 						<div class="flex flex-col">
 							<p class="flex-wrap font-bold truncate text-accent">
-								{catagory.display_name_prefixed}
+								{catagory.display_name}
 							</p>
 							<p class="w-max text-sm">
 								{NumberFormat(catagory.subscribers)} subscribers
@@ -97,8 +103,8 @@
 					<h4 class="text-lg font-bold text-primary">
 						{catagory.title ? catagory.title : catagory.header_title}
 					</h4>
-					{#if catagory.public_description}
-						<p>{catagory.public_description}</p>
+					{#if catagory.public_description_html}
+						<div>{@html catagory.public_description_html}</div>
 					{/if}
 				</div>
 				{#if catagory.banner_img}
@@ -110,7 +116,7 @@
 						/>
 					</div>
 				{/if}
-			</div>
+			</a>
 		{/each}
 	{/if}
 </section>

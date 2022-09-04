@@ -5,8 +5,8 @@
 	import URL from '$lib/url'
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
-	import { onMount } from 'svelte'
 	import { fly } from 'svelte/transition'
+	import { browser } from '$app/env'
 
 	let postdata: {
 		selftext_html: string
@@ -57,23 +57,24 @@
 		loaded = true
 		localStorage.setItem('postdata', JSON.stringify(postdata))
 	}
-	onMount(() => {
+	let introAnimated = false
+	const startData = () => {
+		introAnimated = true
+
 		if (!localStorage.getItem('username')) return goto('/')
 
 		momentUpdateLocale()
 		load()
-	})
+	}
+	// If the the page is reloaded then animation wont happen so call load() manually
+	setTimeout(() => {
+		if (!introAnimated) browser && startData()
+	}, 1000)
 
 	const noOfPlaceholders = Array(3)
-
-	$: console.log($page.url.searchParams.get('sort'))
 </script>
 
-<section
-	in:fly={{ y: 200, duration: 450 }}
-	on:introend={() => (animationEnded = true)}
-	class="p-6 pb-24 space-y-6"
->
+<section in:fly={{ y: 200, duration: 450 }} on:introend={startData} class="p-6 pb-24 space-y-6">
 	{#if !loaded}
 		{#each noOfPlaceholders as _}
 			<PCard />

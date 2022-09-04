@@ -14,6 +14,7 @@
 			author: string
 			created: string
 			body_html: string
+			ups: string
 		}
 		selftext_html: string
 		selftext: string
@@ -68,7 +69,7 @@
 	in:fly={{ y: 200, duration: 450 }}
 	out:fly={{ y: -200, duration: 450 }}
 	on:introend={() => console.log('Transition ENDED')}
-	class="pb-24 space-y-6"
+	class="pb-24 space-y-4"
 >
 	{#if !loaded}
 		<PCard />
@@ -99,6 +100,7 @@
 				class={'p-6 space-y-4'}
 			/>
 		{/each}
+		<div class="divider px-6" />
 		<!-- Comments -->
 		{#if postcomment.length === 0}
 			<PlaceholderComment />
@@ -108,6 +110,7 @@
 					author={comment.data.author}
 					created={comment.data.created}
 					comment={comment.data.body_html}
+					ups={NumberFormat(comment.data.ups)}
 				/>
 			{/each}
 		{/if}

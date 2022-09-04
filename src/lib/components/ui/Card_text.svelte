@@ -23,10 +23,10 @@
 	<h4 class="text-primary font-semibold">{title}</h4>
 	{#if selftext}
 		<div>
-			{#if $page.url.pathname.includes('home')}
-				{@html truncate(selftext)}
-			{:else}
+			{#if $page.url.pathname.includes('/post')}
 				{@html selftext}
+			{:else}
+				{@html truncate(selftext)}
 			{/if}
 		</div>
 	{/if}
