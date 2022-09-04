@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Header from '$lib/layouts/Header.svelte'
 	import Navbar from '$lib/layouts/Navbar.svelte'
 
@@ -13,7 +13,7 @@
 
 <style>
 	:global(.md > p, h1, h2, h3, h4, h5, h6, pre, code, span, a) {
-		white-space: wrap;
+		white-space: inherit;
 	}
 	:global(.md > a[href*='https']) {
 		text-decoration: underline;

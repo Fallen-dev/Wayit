@@ -66,25 +66,33 @@
 	}[] = []
 
 	let loaded = false
+	let postLoaded = false
 	let introAnimated = false
 
 	async function load() {
 		const res = await fetch(URL + `r/${$page.params.subreddit}/about.json?raw_json=1`)
 		const data = await res.json()
 
+		subredditInfo.push(data.data)
+		localStorage.setItem('subredditInfo', JSON.stringify(subredditInfo))
+
+		loaded = true
+		introAnimated = true
+	}
+	async function loadPost() {
 		const postRes = await fetch(URL + `r/${$page.params.subreddit}.json?raw_json=1`)
 		const postData = await postRes.json()
 
-		subredditInfo.push(data.data)
 		postData.data.children.forEach((pdata: { data: any }) => postdata.push(pdata.data))
-
-		loaded = true
-
-		localStorage.setItem('subredditInfo', JSON.stringify(subredditInfo))
+		postLoaded = true
+		introAnimated = true
 	}
 	setTimeout(() => {
-		if (!introAnimated) browser && load()
-	})
+		if (!introAnimated) {
+			browser && load()
+			browser && loadPost()
+		}
+	}, 1000)
 	const noOfPlaceholders = Array(3)
 	let clickToShowInfo: boolean
 	let clickToShowDesc: boolean
@@ -95,7 +103,7 @@
 		<PlaceholderCatagoryCard />
 	{:else}
 		{#each subredditInfo as data}
-			<div class="mt-6 bg-base-100 p-6 rounded-3xl">
+			<div class="mt-4 px-6">
 				<div class="space-y-6 text-center">
 					<div class="avatar flex items-center justify-between gap-6">
 						<div class="text-sm mt-auto">
@@ -105,7 +113,9 @@
 						<div
 							class="w-24 rounded-full bg-base-300 ring ring-offset-2ring ring-primary ring-offset-base-100 ring-offset-2"
 						>
-							<img src={data.icon_img} alt="" />
+							{#if data.icon_img}
+								<img src={data.icon_img} alt="" />
+							{/if}
 						</div>
 						<div class="text-sm mt-auto">
 							<p class="font-bold">{NumberFormat(data.active_user_count)}</p>
@@ -116,7 +126,7 @@
 						<h4 class="text-xl font-bold">{data.title}</h4>
 						<p>r/{data.display_name}</p>
 					</div>
-					<div>{@html data.public_description_html}</div>
+					<div>{@html data.public_description_html || 'No public description'}</div>
 					<div class="&flexbox justify-center gap-6 flex-wrap">
 						<button
 							on:click={() => {
@@ -156,9 +166,13 @@
 		{/each}
 	{/if}
 </section>
-<div class="divider p-6" />
-<section in:fly={{ y: 200, duration: 450, delay: 500 }} class="pb-26 space-y-6">
-	{#if !loaded}
+<div class="divider px-6" />
+<section
+	in:fly={{ y: 200, duration: 450, delay: 500 }}
+	class="px-2 pb-26 space-y-6"
+	on:introend={loadPost}
+>
+	{#if !postLoaded}
 		{#each noOfPlaceholders as _}
 			<PCard />
 		{/each}

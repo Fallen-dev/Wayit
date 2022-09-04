@@ -69,7 +69,7 @@
 	in:fly={{ y: 200, duration: 450 }}
 	out:fly={{ y: -200, duration: 450 }}
 	on:introend={() => console.log('Transition ENDED')}
-	class="pb-24 space-y-4"
+	class="px-2 pb-24 space-y-4"
 >
 	{#if !loaded}
 		<PCard />

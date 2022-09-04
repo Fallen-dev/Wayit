@@ -45,11 +45,11 @@
 	let animationEnded = false
 
 	async function load() {
-		if (localStorage.getItem('postdata')) {
-			loaded = true
-			const dumpArray = []
-			return postdata.push(...JSON.parse(localStorage.getItem('postdata') || ''))
-		}
+		// if (localStorage.getItem('postdata')) {
+		// 	loaded = true
+		// 	const dumpArray = []
+		// 	return postdata.push(...JSON.parse(localStorage.getItem('postdata') || ''))
+		// }
 		const res = await fetch(URL + '.json?raw_json=1&sort=' + $page.url.searchParams.get('sort'))
 		const data = await res.json()
 
@@ -74,7 +74,8 @@
 	const noOfPlaceholders = Array(3)
 </script>
 
-<section in:fly={{ y: 200, duration: 450 }} on:introend={startData} class="p-6 pb-24 space-y-6">
+<h1 class="text-4xl font-light p-6">New posts from Reeddit</h1>
+<section in:fly={{ y: 200, duration: 450 }} on:introend={startData} class="px-2 pb-24 space-y-4">
 	{#if !loaded}
 		{#each noOfPlaceholders as _}
 			<PCard />
