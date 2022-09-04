@@ -2,8 +2,8 @@
 	export let ups: string, num_comments: string
 </script>
 
-<div class="ml-auto space-x-8 &flexbox justify-center gap-4">
-	<div class="&flexbox">
+<div class="ml-auto &flexbox justify-center gap-4">
+	<div class="&flexbox gap-1">
 		<svg
 			class="w-5 h-5"
 			viewBox="0 0 24 24"
@@ -23,9 +23,9 @@
 				stroke-linejoin="round"
 			/>
 		</svg>
-		<span class="ml-1 leading-[0]">{ups}</span>
+		<span class="">{ups}</span>
 	</div>
-	<div class="&flexbox">
+	<div class="&flexbox gap-2">
 		<svg
 			class="w-5 h-5"
 			viewBox="0 0 24 24"
@@ -43,7 +43,7 @@
 			<path d="M7 8H17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 			<path d="M7 13H13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 		</svg>
-		<span class="ml-2 leading-[0]">{num_comments}</span>
+		<span class="leading-[0]">{num_comments}</span>
 	</div>
 	<div>
 		<svg
