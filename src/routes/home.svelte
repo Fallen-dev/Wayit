@@ -98,9 +98,9 @@
 				post_hint={data.post_hint}
 				domain={data.domain}
 				url={data.url}
-				vdo_h={data.media?.reddit_video.height}
-				vdo_w={data.media?.reddit_video.width}
-				vdo_src={data.media?.reddit_video.fallback_url}
+				vdo_h={data.media?.reddit_video?.height}
+				vdo_w={data.media?.reddit_video?.width}
+				vdo_src={data.media?.reddit_video?.fallback_url}
 				img_src={data.preview?.images[0].resolutions[3]?.url}
 				thumbnail={data?.thumbnail}
 			/>
