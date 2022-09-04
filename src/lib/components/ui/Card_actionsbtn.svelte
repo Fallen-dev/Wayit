@@ -2,7 +2,7 @@
 	export let ups: string, num_comments: string
 </script>
 
-<div class="ml-auto w-min space-x-8 &flexbox">
+<div class="ml-auto space-x-8 &flexbox justify-center gap-4">
 	<div class="&flexbox">
 		<svg
 			class="w-5 h-5"
