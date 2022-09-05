@@ -11,16 +11,16 @@
 </script>
 
 <div data-id={id} class="gap-2 &flexbox">
-	<div class="flex-shrink flex flex-col justify-items-stretch overflow-hidden">
+	<div class="flex-shrink flex flex-col justify-items-stretch overflow-hidden gap-1">
 		<a href={'/r/' + subreddit} class="max-w-[12rem] text-sm font-bold text-accent truncate"
 			>r/{subreddit}</a
 		>
 		<div class="text-sm gap-1 &flexbox">
-			<p class="max-w-[12rem] text-sm flex-shrink-0 truncate">
+			<p class="max-w-[12rem] text-sm flex-shrink-0 font-bold">
 				{#if author_premium}
 					<div class="gap-1 &flexbox">
 						<svg
-							class="w-4 h-4 flex-shrink-0"
+							class="w-4 h-4 flex-shrink-0 text-warning"
 							viewBox="0 0 24 24"
 							fill="none"
 							stroke="currentColor"
@@ -43,10 +43,10 @@
 								fill="currentColor"
 							/>
 						</svg>
-						<p class="truncate">u/{uname}</p>
+						<a href={'/u/' + uname}>u/{uname}</a>
 					</div>
 				{:else}
-					u/{uname}
+					<a href={'/u/' + uname}>u/{uname}</a>
 				{/if}
 			</p>
 			<span class="text-primary/40 text-sm">&nbsp;&bull;&nbsp;{date}</span>

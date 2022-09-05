@@ -25,4 +25,14 @@
 	:global(.md > * + *) {
 		margin-top: 1em;
 	}
+	:global(html::-webkit-scrollbar) {
+		/* Hide scrollbar for Chrome, Safari and Opera */
+		display: none;
+		scroll-behavior: smooth;
+	}
+	:global(html) {
+		/* Hide scrollbar for IE, Edge and Firefox */
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
 </style>

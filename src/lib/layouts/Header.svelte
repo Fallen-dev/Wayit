@@ -13,7 +13,7 @@
 
 	let prevURL = '/home'
 	afterNavigate((n): void => {
-		prevURL = n?.from?.pathname || ''
+		prevURL = n?.from?.pathname || '/home'
 	})
 
 	$: checkRoute = () => {

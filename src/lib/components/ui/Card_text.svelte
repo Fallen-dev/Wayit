@@ -13,14 +13,13 @@
 
 <div class="space-y-4">
 	{#if post_hint === 'link'}
-		<a
-			href={url}
-			target="_blank"
-			class="px-3 py-1 font-semibold bg-info text-info-content rounded-3xl"
-			>{domain}
+		<a href={url} target="_blank" class="btn btn-xs btn-info normal-case rounded-full"
+			>{domain}&nbsp;&rightarrow;
 		</a>
 	{/if}
-	<h4 class="text-primary font-semibold">{title}</h4>
+	{#if title}
+		<h4 class="text-primary font-semibold">{title}</h4>
+	{/if}
 	{#if selftext}
 		<div>
 			{#if $page.url.pathname.includes('/post')}

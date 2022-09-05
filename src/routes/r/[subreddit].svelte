@@ -93,7 +93,6 @@
 	}, 1000)
 	const noOfPlaceholders = Array(3)
 	let clickToShowInfo: boolean
-	let clickToShowDesc: boolean
 </script>
 
 <section in:fly={{ y: 200, duration: 450 }} on:introend={load}>

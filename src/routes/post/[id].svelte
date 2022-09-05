@@ -103,13 +103,13 @@
 		{/each}
 	{/if}
 </section>
-<div class="divider px-6" />
 <!-- Comments -->
 <section
-	in:fly={{ y: 200, duration: 450, delay: 500 }}
-	out:fly={{ y: -200, duration: 450, delay: 500 }}
+	in:fly={{ y: 200, duration: 450, delay: 250 }}
+	out:fly={{ y: -200, duration: 450, delay: 250 }}
 	class="px-2 pb-24 space-y-4"
 >
+	<div class="divider px-6">Comments</div>
 	{#if !loaded}
 		<PlaceholderComment />
 	{:else}

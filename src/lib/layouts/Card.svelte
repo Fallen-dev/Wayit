@@ -5,6 +5,8 @@
 	import CardMediaview from '$lib/components/ui/Card_mediaview.svelte'
 	import CardActionsbtn from '$lib/components/ui/Card_actionsbtn.svelte'
 
+	import { mediaSrc } from '$lib/store/mediaSrc'
+
 	export let uname: string,
 		subreddit: string,
 		date: string,
@@ -25,11 +27,12 @@
 		vdo_src: string,
 		img_src: string,
 		thumbnail: string
+
+	mediaSrc.set(img_src)
 </script>
 
 <a
 	href={'/post/' + id}
-	data-id={id}
 	class="block bg-base-100 {$$restProps.overrideClass
 		? $$restProps.class
 		: 'p-4 rounded-2xl space-y-4 border border-neutral/5'}"
