@@ -138,7 +138,7 @@
 					</div>
 					{#if clickToShowInfo}
 						<div class="space-y-4 text-left">
-							<p>Created {UNIXTSReadable(data.created)}</p>
+							<p>Created on {UNIXTSReadable(data.created, true)}</p>
 							<p>Channel type: {data.subreddit_type}</p>
 							<p>Channel id: {data.id}</p>
 							<p>Advertiser category: {data.advertiser_category}</p>

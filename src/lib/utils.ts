@@ -12,7 +12,7 @@ export function momentUpdateLocale() {
 			past: '%s ago',
 			s: 'just now',
 			ss: '%d s',
-			m: 'a minute',
+			m: 'a m',
 			mm: '%d m',
 			h: 'an hour',
 			hh: '%d h',
@@ -21,13 +21,15 @@ export function momentUpdateLocale() {
 			w: 'a week',
 			ww: '%d w',
 			M: 'a month',
-			MM: '%d m',
+			MM: '%d months',
 			y: 'a year',
 			yy: '%d y'
 		}
 	})
 }
-export function UNIXTSReadable(unixTimeStamp: number | string) {
+export function UNIXTSReadable(unixTimeStamp: number | string, intl = false, format = null) {
 	if (typeof unixTimeStamp === 'string') unixTimeStamp = +unixTimeStamp
+
+	if (intl) return moment.unix(unixTimeStamp).format(format ? format : 'MMMM DD, YYYY')
 	return moment.unix(unixTimeStamp).fromNow()
 }

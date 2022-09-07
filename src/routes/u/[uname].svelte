@@ -124,7 +124,9 @@
 							{/if}
 							<h4 class="font-bold text-lg">{data.name}</h4>
 						</div>
-						<p class="text-sm text-primary/60">Redditor from {UNIXTSReadable(data.created)}</p>
+						<p class="text-sm text-primary/60">
+							Redditor from {UNIXTSReadable(data.created, true)}
+						</p>
 					</div>
 				</div>
 				<!-- karma -->
