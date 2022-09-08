@@ -14,6 +14,7 @@
 		selftext: string
 		title: string
 		id: string
+		link_id: string
 		author: string
 		subreddit: string
 		created: string
@@ -162,7 +163,7 @@
 	{:else}
 		{#each postdata as data}
 			<Card
-				id={data.id}
+				id={data.link_id}
 				uname={data.author}
 				author_premium={data.author_premium}
 				subreddit={data.subreddit}

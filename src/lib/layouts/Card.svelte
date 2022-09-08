@@ -28,6 +28,8 @@
 		img_src: string,
 		thumbnail: string
 
+	if (id) id.includes('_') ? (id = id.split('_')[1]) : 'null'
+
 	mediaSrc.set(img_src)
 </script>
 

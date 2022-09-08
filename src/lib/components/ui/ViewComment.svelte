@@ -8,7 +8,7 @@
 	<div class="bg-secondary/5 p-6 rounded-3xl">
 		<div class="space-y-3">
 			<div class="gap-3 &flexbox">
-				<p class="font-bold text-accent text-sm">u/{author}</p>
+				<a href={'/u/' + author} class="font-bold text-accent text-sm">u/{author}</a>
 				<p class="text-sm text-primary/40">
 					{UNIXTSReadable(created)}
 				</p>

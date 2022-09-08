@@ -8,6 +8,7 @@
 	import ViewComment from '$lib/components/ui/ViewComment.svelte'
 	import Card from '$lib/layouts/Card.svelte'
 	import { browser } from '$app/env'
+	import { goto } from '$app/navigation'
 
 	interface Data {
 		data: {
@@ -54,6 +55,8 @@
 
 	let introAnimated = false
 	let loaded = false
+
+	if ($page.params.id === 'null') goto('__error.svelte')
 
 	async function load() {
 		const res = await fetch(URL + $page.params.id + '.json?raw_json=1')
