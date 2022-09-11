@@ -1,10 +1,5 @@
 import moment from 'moment'
 
-export function NumberFormat(str: string | number, notation: any = 'compact') {
-	if (notation !== 'compact') notation = 'standard'
-	if (typeof str === 'string') str = +str
-	return Intl.NumberFormat('en', { notation: notation }).format(str)
-}
 export function momentUpdateLocale() {
 	moment.updateLocale(navigator.language.split('-')[0], {
 		relativeTime: {
@@ -27,9 +22,39 @@ export function momentUpdateLocale() {
 		}
 	})
 }
-export function UNIXTSReadable(unixTimeStamp: number | string, intl = false, format = null) {
-	if (typeof unixTimeStamp === 'string') unixTimeStamp = +unixTimeStamp
 
-	if (intl) return moment.unix(unixTimeStamp).format(format ? format : 'MMMM DD, YYYY')
-	return moment.unix(unixTimeStamp).fromNow()
+class utils {
+	private notation: any
+	private number!: number
+	private unixts!: number
+
+	// Number Format
+	format(notation = 'compact') {
+		this.notation = notation
+
+		return Intl.NumberFormat(navigator.language.split('-')[0], {
+			notation: this.notation
+		}).format(this.number)
+	}
+	numberFormat(number: number | string) {
+		if (typeof number === 'string') number = +number
+
+		this.number = number
+		return this
+	}
+	// Unix readable
+	unix(unixTimeStamp: string | number) {
+		if (typeof unixTimeStamp === 'string') unixTimeStamp = +unixTimeStamp
+
+		this.unixts = unixTimeStamp
+		return this
+	}
+	now() {
+		return moment.unix(this.unixts).fromNow()
+	}
+	unixFormat(format = 'MMMM DD, YYYY') {
+		return moment.unix(this.unixts).format(format)
+	}
 }
+
+export default new utils()

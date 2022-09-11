@@ -3,7 +3,7 @@
 	import URL from '$lib/url'
 	import { page } from '$app/stores'
 	import PCard from '$lib/layouts/placeholder/P_Card.svelte'
-	import { NumberFormat, UNIXTSReadable } from '$lib/utils'
+	import utils from '$lib/utils'
 	import PlaceholderComment from '$lib/layouts/placeholder/PlaceholderComment.svelte'
 	import ViewComment from '$lib/components/ui/ViewComment.svelte'
 	import Card from '$lib/layouts/Card.svelte'
@@ -84,14 +84,14 @@
 				uname={data.author}
 				author_premium={data.author_premium}
 				subreddit={data.subreddit}
-				date={UNIXTSReadable(data.created)}
+				date={utils.unix(data.created).now()}
 				is_video={data.is_video}
 				over_18={data.over_18}
 				total_awards_received={data.total_awards_received}
 				title={data.title}
 				selftext={data.selftext_html}
-				ups={NumberFormat(data.ups)}
-				num_comments={NumberFormat(data.num_comments)}
+				ups={utils.numberFormat(data.ups).format()}
+				num_comments={utils.numberFormat(data.num_comments).format()}
 				post_hint={data.post_hint}
 				domain={data.domain}
 				url={data.url}
@@ -121,7 +121,7 @@
 				author={comment.data.author}
 				created={comment.data.created}
 				comment={comment.data.body_html}
-				ups={NumberFormat(comment.data.ups)}
+				ups={utils.numberFormat(comment.data.ups).format()}
 			/>
 		{/each}
 	{/if}

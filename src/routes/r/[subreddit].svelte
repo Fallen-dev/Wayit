@@ -6,7 +6,7 @@
 	import PlaceholderCatagoryCard from '$lib/layouts/placeholder/PlaceholderCatagoryCard.svelte'
 	import PCard from '$lib/layouts/placeholder/P_Card.svelte'
 	import URL from '$lib/url'
-	import { NumberFormat, UNIXTSReadable } from '$lib/utils'
+	import utils from '$lib/utils'
 	import { fly } from 'svelte/transition'
 
 	let subredditInfo: {
@@ -104,7 +104,7 @@
 				<div class="space-y-6 text-center">
 					<div class="avatar flex items-center justify-between gap-6">
 						<div class="text-sm mt-auto">
-							<p class="font-bold">{NumberFormat(data.subscribers)}</p>
+							<p class="font-bold">{utils.numberFormat(data.subscribers).format('standard')}</p>
 							Subscribers
 						</div>
 						<div
@@ -115,7 +115,9 @@
 							{/if}
 						</div>
 						<div class="text-sm mt-auto">
-							<p class="font-bold">{NumberFormat(data.active_user_count)}</p>
+							<p class="font-bold">
+								{utils.numberFormat(data.active_user_count).format('standard')}
+							</p>
 							Active users
 						</div>
 					</div>
@@ -138,7 +140,7 @@
 					</div>
 					{#if clickToShowInfo}
 						<div class="space-y-4 text-left">
-							<p>Created on {UNIXTSReadable(data.created, true)}</p>
+							<p>Created on {utils.unix(data.created).unixFormat()}</p>
 							<p>Channel type: {data.subreddit_type}</p>
 							<p>Channel id: {data.id}</p>
 							<p>Advertiser category: {data.advertiser_category}</p>
@@ -169,14 +171,14 @@
 				uname={data.author}
 				author_premium={data.author_premium}
 				subreddit={data.subreddit}
-				date={UNIXTSReadable(data.created)}
+				date={utils.unix(data.created).now()}
 				is_video={data.is_video}
 				over_18={data.over_18}
 				total_awards_received={data.total_awards_received}
 				title={data.title}
 				selftext={data.selftext_html}
-				ups={NumberFormat(data.ups)}
-				num_comments={NumberFormat(data.num_comments)}
+				ups={utils.numberFormat(data.ups).format()}
+				num_comments={utils.numberFormat(data.num_comments).format()}
 				post_hint={data.post_hint}
 				domain={data.domain}
 				url={data.url}

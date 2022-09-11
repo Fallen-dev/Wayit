@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { UNIXTSReadable } from '$lib/utils'
+	import utils from '$lib/utils'
 
 	export let author: string, created: string, comment: string, ups: string
 </script>
@@ -10,7 +10,7 @@
 			<div class="gap-3 &flexbox">
 				<a href={'/u/' + author} class="font-bold text-accent text-sm">u/{author}</a>
 				<p class="text-sm text-primary/40">
-					{UNIXTSReadable(created)}
+					{utils.unix(created).now}
 				</p>
 			</div>
 			<div>{@html comment}</div>

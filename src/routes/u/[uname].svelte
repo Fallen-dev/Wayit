@@ -4,7 +4,7 @@
 	import { fly } from 'svelte/transition'
 	import { page } from '$app/stores'
 	import Card from '$lib/layouts/Card.svelte'
-	import { NumberFormat, UNIXTSReadable } from '$lib/utils'
+	import utils from '$lib/utils'
 	import { browser } from '$app/env'
 	import PlaceholderUser from '$lib/layouts/placeholder/PlaceholderUser.svelte'
 
@@ -126,7 +126,7 @@
 							<h4 class="font-bold text-lg">{data.name}</h4>
 						</div>
 						<p class="text-sm text-primary/60">
-							Redditor from {UNIXTSReadable(data.created, true)}
+							Redditor from {utils.unix(data.created).unixFormat()}
 						</p>
 					</div>
 				</div>
@@ -135,17 +135,19 @@
 				<div class="stats flex">
 					<div class="stat place-items-center">
 						<div class="stat-title">Awardee</div>
-						<div class="stat-value text-xl">{NumberFormat(data.awardee_karma)}</div>
+						<div class="stat-value text-xl">{utils.numberFormat(data.awardee_karma).format()}</div>
 					</div>
 
 					<div class="stat place-items-center">
 						<div class="stat-title">Total</div>
-						<div class="stat-value text-xl text-secondary">{NumberFormat(data.total_karma)}</div>
+						<div class="stat-value text-xl text-secondary">
+							{utils.numberFormat(data.total_karma).format()}
+						</div>
 					</div>
 
 					<div class="stat place-items-center">
 						<div class="stat-title">Comment</div>
-						<div class="stat-value text-xl">{NumberFormat(data.comment_karma)}</div>
+						<div class="stat-value text-xl">{utils.numberFormat(data.comment_karma).format()}</div>
 					</div>
 				</div>
 			</div>
@@ -167,14 +169,14 @@
 				uname={data.author}
 				author_premium={data.author_premium}
 				subreddit={data.subreddit}
-				date={UNIXTSReadable(data.created)}
+				date={utils.unix(data.created).now()}
 				is_video={data.is_video}
 				over_18={data.over_18}
 				total_awards_received={data.total_awards_received}
 				title={data.title}
 				selftext={data.body_html}
-				ups={NumberFormat(data.ups)}
-				num_comments={NumberFormat(data.num_comments)}
+				ups={utils.numberFormat(data.ups).format()}
+				num_comments={utils.numberFormat(data.num_comments).format()}
 				post_hint={data.post_hint}
 				domain={data.domain}
 				url={data.url}

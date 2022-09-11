@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Card from '$lib/layouts/Card.svelte'
 	import PCard from '$lib/layouts/placeholder/P_Card.svelte'
-	import { NumberFormat, momentUpdateLocale, UNIXTSReadable } from '$lib/utils'
+	import utils, { momentUpdateLocale } from '$lib/utils'
 	import URL from '$lib/url'
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
@@ -87,14 +87,14 @@
 				uname={data.author}
 				author_premium={data.author_premium}
 				subreddit={data.subreddit}
-				date={UNIXTSReadable(data.created)}
+				date={utils.unix(data.created).now()}
 				is_video={data.is_video}
 				over_18={data.over_18}
 				total_awards_received={data.total_awards_received}
 				title={data.title}
 				selftext={data.selftext_html}
-				ups={NumberFormat(data.ups)}
-				num_comments={NumberFormat(data.num_comments)}
+				ups={utils.numberFormat(data.ups).format()}
+				num_comments={utils.numberFormat(data.num_comments).format()}
 				post_hint={data.post_hint}
 				domain={data.domain}
 				url={data.url}

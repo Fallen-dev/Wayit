@@ -2,7 +2,7 @@
 	import { fly } from 'svelte/transition'
 	import PlaceholderCatagoryCard from '$lib/layouts/placeholder/PlaceholderCatagoryCard.svelte'
 	import URL from '$lib/url'
-	import { NumberFormat } from '$lib/utils'
+	import utils from '$lib/utils'
 	import { browser } from '$app/env'
 
 	interface Data {
@@ -137,7 +137,7 @@
 								{catagory.display_name}
 							</p>
 							<p class="w-max text-sm">
-								{NumberFormat(catagory.subscribers)} subscribers
+								{utils.numberFormat(catagory.subscribers).format()} subscribers
 							</p>
 						</div>
 					</div>
@@ -180,7 +180,7 @@
 								{catagory.display_name}
 							</p>
 							<p class="w-max text-sm">
-								{NumberFormat(catagory.subscribers)} subscribers
+								{utils.numberFormat(catagory.subscribers).format()} subscribers
 							</p>
 						</div>
 					</div>
